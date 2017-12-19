@@ -1,0 +1,1 @@
+<settings><promoImagesIcon>Assets/Imagenes/Promocionales/icono.png</promoImagesIcon><promoImagesFeatured>Assets/Imagenes/Promocionales/promocional.png</promoImagesFeatured></settings>
