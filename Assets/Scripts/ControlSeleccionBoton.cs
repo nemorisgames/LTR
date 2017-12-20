@@ -42,14 +42,14 @@ public class ControlSeleccionBoton : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GetComponent<UIButton> ().isEnabled = false;
-		escena = int.Parse(transform.FindChild ("Label").gameObject.GetComponent<UILabel> ().text);
+		escena = int.Parse(transform.Find ("Label").gameObject.GetComponent<UILabel> ().text);
 	}
 
 	public void setInformacion(int misIdolosInfo, int miTiempoInfo, int miCalificacionInfo, int idolosPrimeroInfo, string idolosPrimeroNombreInfo, int idolosSegundoInfo, string idolosSegundoNombreInfo, int idolosTerceroInfo, string idolosTerceroNombreInfo, int tiempoPrimeroInfo, string tiempoPrimeroNombreInfo, int tiempoSegundoInfo, string tiempoSegundoNombreInfo, int tiempoTerceroInfo, string tiempoTerceroNombreInfo){
 		
 		//GetComponent<UIButton> ().isEnabled = false;
 
-		estrellas = transform.FindChild ("estrellas").gameObject.GetComponent<UISprite> ();
+		estrellas = transform.Find ("estrellas").gameObject.GetComponent<UISprite> ();
 
 		misIdolos = misIdolosInfo;
 		miTiempo = miTiempoInfo;

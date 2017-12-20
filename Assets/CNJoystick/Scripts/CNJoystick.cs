@@ -86,9 +86,9 @@ public class CNJoystick : MonoBehaviour
         CurrentCamera = transform.parent.GetComponent<Camera>();
 
         transformCache = transform;
-        joystickBase = transformCache.FindChild("Base").gameObject;
+        joystickBase = transformCache.Find("Base").gameObject;
         joystickBaseTransform = joystickBase.transform;
-        joystick = transform.FindChild("Joystick").gameObject;
+        joystick = transform.Find("Joystick").gameObject;
         joystickTransform = joystick.transform;
 
         InitialCalculations();

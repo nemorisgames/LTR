@@ -165,7 +165,7 @@ public class Central : MonoBehaviour {
         //escenaRoot = imagen.FindChild ("escenaRoot");
         personaje.gameObject.SetActive(false);
 		if (escenaRoot == null) escenaRoot = GameObject.Find("escenaRoot").transform;
-		bloquesRoot = escenaRoot.FindChild ("bloquesRoot");
+		bloquesRoot = escenaRoot.Find ("bloquesRoot");
         if (traerBD) {
             //StartCoroutine(cargarEscena(i));
             cargarEscenaEnDispositivo(escenaActual);
@@ -255,7 +255,7 @@ public class Central : MonoBehaviour {
 			int indiceBloque = int.Parse(resp[i * 4 + 4])>=bloquesPrefab.Length?0:int.Parse(resp[i * 4 + 4]);
 			//if(activarAR){ 
 			if(indiceBloque == 0 || indiceBloque == 2 || indiceBloque == 3 || indiceBloque == 32 || (indiceBloque >= 34 && indiceBloque <= 41))
-				Destroy(bloques[i].transform.FindChild("cubo_001_arreglado").gameObject); //Destroy(bloques[i].gameObject); //
+				Destroy(bloques[i].transform.Find("cubo_001_arreglado").gameObject); //Destroy(bloques[i].gameObject); //
 			//}
 			//hace que los switch carguen info
 			if(indiceBloque == 6 || indiceBloque == 9 || indiceBloque == 10){
@@ -356,7 +356,7 @@ bloques[i] = t.gameObject.GetComponent<Bloque>();
 			int indiceBloque = int.Parse(resp[i * 4 + 4]) >= bloquesPrefab.Length ? 0 : int.Parse(resp[i * 4 + 4]);
 			//if(activarAR){ 
 			if(indiceBloque == 0 || indiceBloque == 2 || indiceBloque == 3 || indiceBloque == 32 || (indiceBloque >= 34 && indiceBloque <= 41))
-                Destroy(bloques[i].transform.FindChild("cubo_001_arreglado").gameObject); //Destroy(bloques[i].gameObject); //
+                Destroy(bloques[i].transform.Find("cubo_001_arreglado").gameObject); //Destroy(bloques[i].gameObject); //
 			//}
 			//hace que los switch carguen info
 			if(indiceBloque == 6 || indiceBloque == 9 || indiceBloque == 10){

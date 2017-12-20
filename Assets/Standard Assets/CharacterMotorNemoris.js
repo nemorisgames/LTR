@@ -55,7 +55,7 @@ var sonidoMuerte:AudioClip;
 var proteccionEscudo:GameObject;
 
 function Awake () {
-	proteccionEscudo = transform.FindChild("proteccion").gameObject;
+	proteccionEscudo = transform.Find("proteccion").gameObject;
 	proteccionEscudo.SetActive(false);
 	controller = GetComponent (CharacterController);
 	tr = transform;
@@ -519,7 +519,7 @@ function reset(){
 	movement.velocity = Vector3.zero;
 	inputMoveDirection = Vector3.zero;
 	movement.frameVelocity = Vector3.zero;
-	var obj:GameObject = transform.FindChild("comprobacion").gameObject;
+	var obj:GameObject = transform.Find("comprobacion").gameObject;
 	var comp:ComprobacionSuelo = obj.GetComponent(ComprobacionSuelo);
 	var ultimoBloque:GameObject = comp.ultimoBloque;
 	print(ultimoBloque.name);

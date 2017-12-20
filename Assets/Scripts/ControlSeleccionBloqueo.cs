@@ -11,17 +11,17 @@ public class ControlSeleccionBloqueo : MonoBehaviour {
 	UILabel estrellasActualesLabel;
 	// Use this for initialization
 	void Start () {
-		barra = transform.FindChild ("barra").gameObject.GetComponent<UIProgressBar> ();
-		estrellasLabel = transform.FindChild ("Label").gameObject.GetComponent<UILabel> ();
-		estrellasActualesLabel = transform.FindChild ("barra/Label").gameObject.GetComponent<UILabel> ();
+		barra = transform.Find ("barra").gameObject.GetComponent<UIProgressBar> ();
+		estrellasLabel = transform.Find ("Label").gameObject.GetComponent<UILabel> ();
+		estrellasActualesLabel = transform.Find ("barra/Label").gameObject.GetComponent<UILabel> ();
 	}
 
 	public void setInformacion(int estrellas, int estrellasN){
 		if ((estrellas >= estrellasN && estrellasN > 0) || (estrellas >= estrellasNecesarias && estrellasN <= 0)) {
 			bloqueado = false;
-			if(barra == null) barra = transform.FindChild("barra").gameObject.GetComponent<UIProgressBar>();
-            if (estrellasLabel == null) estrellasLabel = transform.FindChild("Label").gameObject.GetComponent<UILabel>();
-            if (estrellasActualesLabel == null) estrellasActualesLabel = transform.FindChild("barra/Label").gameObject.GetComponent<UILabel>();
+			if(barra == null) barra = transform.Find("barra").gameObject.GetComponent<UIProgressBar>();
+            if (estrellasLabel == null) estrellasLabel = transform.Find("Label").gameObject.GetComponent<UILabel>();
+            if (estrellasActualesLabel == null) estrellasActualesLabel = transform.Find("barra/Label").gameObject.GetComponent<UILabel>();
             barra.gameObject.SetActive(false);
 			estrellasLabel.gameObject.SetActive(false);
 			gameObject.GetComponent<UISprite>().color = new Color(1f, 1f, 1f, 0.6f);
@@ -29,9 +29,9 @@ public class ControlSeleccionBloqueo : MonoBehaviour {
 			estrellasActuales = estrellas;
 			if (estrellasN > 0)
 					estrellasNecesarias = estrellasN;
-            if (barra == null) barra = transform.FindChild("barra").gameObject.GetComponent<UIProgressBar>();
-            if (estrellasLabel == null) estrellasLabel = transform.FindChild("Label").gameObject.GetComponent<UILabel>();
-            if (estrellasActualesLabel == null) estrellasActualesLabel = transform.FindChild("barra/Label").gameObject.GetComponent<UILabel>();
+            if (barra == null) barra = transform.Find("barra").gameObject.GetComponent<UIProgressBar>();
+            if (estrellasLabel == null) estrellasLabel = transform.Find("Label").gameObject.GetComponent<UILabel>();
+            if (estrellasActualesLabel == null) estrellasActualesLabel = transform.Find("barra/Label").gameObject.GetComponent<UILabel>();
             barra.value = ((float)estrellasActuales / (float)estrellasNecesarias);
 			estrellasLabel.text = "" + estrellasNecesarias;
 			estrellasActualesLabel.text = "" + estrellasActuales;

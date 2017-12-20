@@ -41,7 +41,7 @@ public class ComportamientoSwitch : MonoBehaviour {
 		activado = a;
 		GetComponent<Renderer>().material.color = (activado ?  Color.grey : Color.white);
 		if (tiempoActivo != -1f) { 
-			transform.parent.FindChild ("cubo_001_arreglado").GetComponent<Renderer>().material.color = (activado ? Color.grey : Color.white );
+			transform.parent.Find ("cubo_001_arreglado").GetComponent<Renderer>().material.color = (activado ? Color.grey : Color.white );
 
 		}
 		for(int i = 0; i < objetivos.Length; i++){
@@ -53,7 +53,7 @@ public class ComportamientoSwitch : MonoBehaviour {
 			else GetComponent<AudioSource>().pitch = 2f;
 			GetComponent<AudioSource>().Play();
 		}
-		transform.parent.FindChild ("Cube").transform.localPosition = new Vector3(0f, activado?0.75f:1f, 0f);
+		transform.parent.Find ("Cube").transform.localPosition = new Vector3(0f, activado?0.75f:1f, 0f);
 	}
 
 	void OnTriggerExit(Collider other){
