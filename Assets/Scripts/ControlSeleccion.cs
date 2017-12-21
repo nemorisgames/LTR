@@ -58,8 +58,9 @@ public class ControlSeleccion : MonoBehaviour {
             // if (botones[j].escena == numero)
             //{
             int miCalificacion = PlayerPrefs.GetInt("calificacionEscena" + botones[j].escena, 0);
-            miTiempo = PlayerPrefs.GetInt("escenaRecord" + escenaActual);
-            misIdolos = 
+            miTiempo = PlayerPrefs.GetInt("escenaRecord" + botones[j].escena);
+            Debug.Log(miTiempo);
+            //misIdolos = PlayerPrefs.GetInt("")
             print(miCalificacion);
             botones[j].enabled = true;
             botones[j].setInformacion(misIdolos, miTiempo, miCalificacion, 0, "Loading...", 0, "Loading...", 0, "Loading...", 0, "Loading...", 0, "Loading...", 0, "Loading...");

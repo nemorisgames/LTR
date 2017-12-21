@@ -419,12 +419,13 @@ g.transform.Find("idolo").gameObject.SetActive(true);
             objetoNuevoRecord.PlayForward();
             print ("nuevo record!");
         }*/
-        if (PlayerPrefs.GetInt("escenaRecord" + escenaActual) < (int)tiempoActual * 10)
+		//Debug.Log(escenaActual);
+        if (PlayerPrefs.GetInt("escenaRecord" + escenaActual) > (int)tiempoActual || PlayerPrefs.GetInt("escenaRecord" + escenaActual, 0) == 0)
         {
             objetoNuevoRecord.PlayForward();
             print("nuevo record!");
 
-            PlayerPrefs.SetInt("escenaRecord" + escenaActual, (int)tiempoActual * 10);
+            PlayerPrefs.SetInt("escenaRecord" + escenaActual, (int)tiempoActual);
         }
         //}
 #if !UNITY_WEBPLAYER
