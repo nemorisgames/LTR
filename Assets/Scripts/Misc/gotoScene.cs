@@ -6,7 +6,7 @@ public class gotoScene : MonoBehaviour {
 	public bool cambiarAutomatico = false;
 	// Use this for initialization
 	void Start () {
-		//PlayerPrefs.DeleteAll ();
+		PlayerPrefs.DeleteAll ();
 		if (cambiarAutomatico) irEscena ();
 	}
 

@@ -176,7 +176,7 @@ public class Central : MonoBehaviour {
             //mensajeLoading.SetActive (false);
         }
 	}
-
+    /*
 	IEnumerator cargarEscena(int escenaActual){
 #if !UNITY_WEBPLAYER
 		//Handheld.StartActivityIndicator ();
@@ -276,7 +276,7 @@ public class Central : MonoBehaviour {
 		objetosMoviles = GameObject.FindObjectsOfType<PosicionInicial> ();
 		//mensajeLoading.SetActive (false);
 		escenaCargada = true;
-	}
+	}*/
 
     void cargarEscenaEnDispositivo(int escenaActual)
     {
@@ -398,7 +398,7 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 	}
 
 	IEnumerator terminarEscena(){
-		#if !UNITY_WEBPLAYER
+        /*#if !UNITY_WEBPLAYER
 //		Handheld.StartActivityIndicator ();
 		#endif
 		WWWForm form = new WWWForm();
@@ -414,16 +414,23 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 			//mostrarError("Error de conexion");
 			yield return null;
 		} else {
-			int tiempoRecord = int.Parse(download.text);
-			if(tiempoRecord == tiempoActual){
-				objetoNuevoRecord.PlayForward();
-				print ("nuevo record!");
-			}
-			PlayerPrefs.SetInt("escenaRecord" + escenaActual, tiempoRecord);
-		}
+			int tiempoRecord = int.Parse(download.text);*/
+        /*if(tiempoRecord == tiempoActual){
+            objetoNuevoRecord.PlayForward();
+            print ("nuevo record!");
+        }*/
+        if (PlayerPrefs.GetInt("escenaRecord" + escenaActual) < (int)tiempoActual * 10)
+        {
+            objetoNuevoRecord.PlayForward();
+            print("nuevo record!");
+
+            PlayerPrefs.SetInt("escenaRecord" + escenaActual, (int)tiempoActual * 10);
+        }
+        //}
 #if !UNITY_WEBPLAYER
-//		Handheld.StopActivityIndicator();
+        //		Handheld.StopActivityIndicator();
 #endif
+        yield return null;
 	}
 
 	void OnGUI(){
@@ -506,10 +513,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 				Dictionary<string,string> dict = new Dictionary<string,string> ();
 				dict.Add ("escenaActual", "" + escenaActual);
 	#if UNITY_IPHONE
-	FlurryAnalytics.logEventWithParameters ("BotonPausa", dict, false);
+	//FlurryAnalytics.logEventWithParameters ("BotonPausa", dict, false);
 	#endif
 	#if UNITY_ANDROID
-				FlurryAndroid.logEvent ("BotonPausa", dict, false);
+		//		FlurryAndroid.logEvent ("BotonPausa", dict, false);
 	#endif
 				pausa = !pausa;
 				//if(!panelPausa.enabled){ 
@@ -536,10 +543,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		Dictionary<string,string> dict = new Dictionary<string,string>();
 		dict.Add( "escenaActual", "" + escenaActual );
 		#if UNITY_IPHONE
-		FlurryAnalytics.logEventWithParameters ("BotonContinuar", dict, false);
+		//FlurryAnalytics.logEventWithParameters ("BotonContinuar", dict, false);
 		#endif
 		#if UNITY_ANDROID
-		FlurryAndroid.logEvent ("BotonContinuar", dict, false);
+		//FlurryAndroid.logEvent ("BotonContinuar", dict, false);
 		#endif
 		#if UNITY_WEBPLAYER && !UNITY_EDITOR
 		GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("Boton", "Continuar", "Escena"+escenaActual);
@@ -575,10 +582,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		dict.Add( "activarAR", "" + 1 );
 		dict.Add( "escenaActual", "" + escenaActual );
 		#if UNITY_IPHONE
-		FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
+		//FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
 		#endif
 		#if UNITY_ANDROID
-		FlurryAndroid.logEvent ("JugarEscena",dict, false);
+		//FlurryAndroid.logEvent ("JugarEscena",dict, false);
 		#endif
 		#if UNITY_WEBPLAYER
 		Application.LoadLevel ("EscenaWebplayer");
@@ -603,10 +610,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		dict.Add( "activarAR", "" + 0 );
 		dict.Add( "escenaActual", "" + escenaActual );
 		#if UNITY_IPHONE
-		FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
+		//FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
 		#endif
 		#if UNITY_ANDROID
-		FlurryAndroid.logEvent ("JugarEscena",dict, false);
+		//FlurryAndroid.logEvent ("JugarEscena",dict, false);
 		#endif
 		#if UNITY_WEBPLAYER
 		Application.LoadLevel ("EscenaWebplayer");
@@ -626,10 +633,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		dict.Add( "activarAR", "" + 0 );
 		dict.Add( "escenaActual", "" + escenaActual );
 		#if UNITY_IPHONE
-		FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
+		//FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
 		#endif
 		#if UNITY_ANDROID
-		FlurryAndroid.logEvent ("JugarEscena",dict, false);
+		//FlurryAndroid.logEvent ("JugarEscena",dict, false);
 		#endif
 		#if UNITY_WEBPLAYER
 		Application.LoadLevel ("EscenaWebplayer");
@@ -649,10 +656,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
         Dictionary<string,string> dict = new Dictionary<string,string>();
 		dict.Add( "escenaActual", "" + escenaActual );
 		#if UNITY_IPHONE
-		FlurryAnalytics.logEventWithParameters ("BotonExit", dict, false);
+		//FlurryAnalytics.logEventWithParameters ("BotonExit", dict, false);
 		#endif
 		#if UNITY_ANDROID
-		FlurryAndroid.logEvent ("BotonExit", dict, false);
+		//FlurryAndroid.logEvent ("BotonExit", dict, false);
 		#endif
 		#if UNITY_WEBPLAYER && !UNITY_EDITOR
 		GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("Boton", "Exit", "Escena"+escenaActual);
@@ -665,10 +672,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		Dictionary<string,string> dict = new Dictionary<string,string>();
 		dict.Add( "escenaActual", "" + escenaActual );
 		#if UNITY_IPHONE
-		FlurryAnalytics.logEventWithParameters ("BotonAgain", dict, false);
+		//FlurryAnalytics.logEventWithParameters ("BotonAgain", dict, false);
 		#endif
 		#if UNITY_ANDROID
-		FlurryAndroid.logEvent ("BotonAgain", dict, false);
+		//FlurryAndroid.logEvent ("BotonAgain", dict, false);
 		#endif
 		#if UNITY_WEBPLAYER && !UNITY_EDITOR
 		GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("Boton", "Again", "Escena"+escenaActual);
@@ -682,10 +689,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		Dictionary<string,string> dict = new Dictionary<string,string>();
 		dict.Add( "escenaActual", "" + escenaActual );
 		#if UNITY_IPHONE
-		FlurryAnalytics.logEventWithParameters ("BotonReset", dict, false);
+		//FlurryAnalytics.logEventWithParameters ("BotonReset", dict, false);
 		#endif
 		#if UNITY_ANDROID
-		FlurryAndroid.logEvent ("BotonReset", dict, false);
+		//FlurryAndroid.logEvent ("BotonReset", dict, false);
 		#endif
 		#if UNITY_WEBPLAYER && !UNITY_EDITOR 
 		GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("Boton", "Reset", "Escena"+escenaActual);
@@ -861,10 +868,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 				dict.Add( "tiempo", "" + tiempoActual );
 				dict.Add( "escenaActual", "" + escenaActual );
 				#if UNITY_IPHONE
-				FlurryAnalytics.logEventWithParameters ("EscenaPasada", dict, false);
+				//FlurryAnalytics.logEventWithParameters ("EscenaPasada", dict, false);
 				#endif
 				#if UNITY_ANDROID
-				FlurryAndroid.logEvent ("EscenaPasada",dict, false);
+				//FlurryAndroid.logEvent ("EscenaPasada",dict, false);
 #endif
 #if UNITY_WEBPLAYER && !UNITY_EDITOR
 				GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("EscenaPasada", "", "Escena" + escenaActual);
@@ -872,7 +879,7 @@ g.transform.Find("idolo").gameObject.SetActive(true);
                 PlayerPrefs.SetInt("calificacionEscena" + escenaActual, calificacion);
 				if(PlayerPrefs.GetInt("escenasPasadas", 0) < escenaActual) PlayerPrefs.SetInt("escenasPasadas", escenaActual);
 				StartCoroutine(terminarEscena ());
-				if(publicarFacebook != null) publicarFacebook.SendMessage("setMensaje", "I've passed the Stage " + escenaActual + " in " + (tiempoActual / 10f) + " seconds. Can anybody beat me?");
+				//if(publicarFacebook != null) publicarFacebook.SendMessage("setMensaje", "I've passed the Stage " + escenaActual + " in " + (tiempoActual / 10f) + " seconds. Can anybody beat me?");
 
 			}
 			if (Input.GetKeyUp(KeyCode.Escape)) exit();
@@ -895,10 +902,10 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 				dict.Add( "tiempo", "" + tiempoActual );
 				dict.Add( "escenaActual", "" + escenaActual );
 				#if UNITY_IPHONE
-				FlurryAnalytics.logEventWithParameters ("EscenaPerdiste", dict, false);
+				//FlurryAnalytics.logEventWithParameters ("EscenaPerdiste", dict, false);
 				#endif
 				#if UNITY_ANDROID
-				FlurryAndroid.logEvent ("EscenaPerdiste",dict, false);
+				//FlurryAndroid.logEvent ("EscenaPerdiste",dict, false);
 				#endif
 				#if UNITY_WEBPLAYER && !UNITY_EDITOR
 				GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("EscenaPerdiste", "", "Escena" + escenaActual);

@@ -107,12 +107,12 @@ public class tutorialControl : MonoBehaviour {
 		Dictionary<string,string> dict = new Dictionary<string,string>();
 		dict.Add( "activarAR", "" + 1 );
 		dict.Add( "escenaActual", "" + escena );
-		#if UNITY_IPHONE
+		/*#if UNITY_IPHONE
 		FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("JugarEscena",dict, false);
-		#endif
+		#endif*/
 		#if UNITY_WEBPLAYER
 		Application.LoadLevel ("EscenaWebplayer");
 		#endif
@@ -131,12 +131,12 @@ public class tutorialControl : MonoBehaviour {
 		Dictionary<string,string> dict = new Dictionary<string,string>();
 		dict.Add( "activarAR", "" + 0 );
 		dict.Add( "escenaActual", "" + escena );
-		#if UNITY_IPHONE
+		/*#if UNITY_IPHONE
 		FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("JugarEscena",dict, false);
-		#endif
+		#endif*/
 		#if UNITY_WEBPLAYER
 		Application.LoadLevel ("EscenaWebplayer");
 		#else

@@ -34,9 +34,9 @@ public class ControlTitulo : MonoBehaviour {
 		else
 			AR.value = PlayerPrefs.GetInt ("activarAR", 0) == 1;
 #endif
-		if (!PlayerPrefs.HasKey ("nombre")) {
-			verPanelNombre ();
-		} else
+		//if (!PlayerPrefs.HasKey ("nombre")) {
+		//	verPanelNombre ();
+		//} else
 			panelPlay.PlayForward ();
 		nombreInput.value = PlayerPrefs.HasKey ("nombre")?PlayerPrefs.GetString ("nombre", "user"):"user";
 		nombreInputGrande.value = PlayerPrefs.HasKey ("nombre")?PlayerPrefs.GetString ("nombre", "user"):"user";
@@ -47,7 +47,7 @@ public class ControlTitulo : MonoBehaviour {
 		#if UNITY_WEBPLAYER
 		for(int i = 0; i < objetosWebplayer.Length; i++) objetosWebplayer[i].SetActive(!objetosWebplayer[i].activeSelf);
 		#endif
-		StartCoroutine (setNombre ());
+		//StartCoroutine (setNombre ());
 		//PlayerPrefs.DeleteAll ();
 
 
@@ -60,7 +60,7 @@ public class ControlTitulo : MonoBehaviour {
 			panelPlay.PlayReverse ();
 		}*/
 	}
-
+    /*
 	IEnumerator setNombre(){
 		string nombre = "";
 		WWWForm form = new WWWForm();
@@ -92,42 +92,45 @@ public class ControlTitulo : MonoBehaviour {
 			cambiarNombre(true);
 		}
 		//panelPlay.PlayForward ();
-	}
+	}*/
 
 	public void help(){
-		#if UNITY_IPHONE
+		/*#if UNITY_IPHONE
 		FlurryAnalytics.logEvent ("BotonHelp", false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("BotonHelp", false);
 		#endif
+        */
 	}
 
 	public void closeHelp(){
+        /*
 		#if UNITY_IPHONE
 		FlurryAnalytics.logEvent ("BotonHelpClose", false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("BotonHelpClose", false);
-		#endif
+		#endif*/
 	}
 
 	public void verMarcador(){
+        /*
 		#if UNITY_IPHONE
 		FlurryAnalytics.logEvent ("BotonVerMarcador", false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("BotonVerMarcador", false);
-		#endif
+		#endif*/
 	}
 
 	public void rate(){
-		#if UNITY_IPHONE
+		/*#if UNITY_IPHONE
 		FlurryAnalytics.logEvent ("BotonRate", false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("BotonRate", false);
-		#endif
+		#endif*/
 	}
 
 	public void verPanelNombre(){
@@ -152,13 +155,13 @@ public class ControlTitulo : MonoBehaviour {
 			nombreInput.value = PlayerPrefs.GetString ("nombre");
 			return;
 		}
-		#if UNITY_IPHONE
+		/*#if UNITY_IPHONE
 		FlurryAnalytics.logEvent ("CambiarNombre", false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("CambiarNombre", false);
 		#endif
-		StartCoroutine (cambiarNombreBD (defaultName));
+		StartCoroutine (cambiarNombreBD (defaultName));*/
 	}
 
 	IEnumerator cambiarNombreBD(bool defaultName){
@@ -222,12 +225,12 @@ public class ControlTitulo : MonoBehaviour {
 
 	public void play(){
 		PlayerPrefs.SetInt ("activarAR", AR.value?1:0);
-		#if UNITY_IPHONE
+		/*#if UNITY_IPHONE
 		FlurryAnalytics.logEvent ("PlayTitulo", false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("PlayTitulo", false);
-		#endif
+		#endif*/
 		if (PlayerPrefs.GetInt ("Historia1", 0) == 0) {
 			Application.LoadLevel ("Historia11");
 		}
@@ -239,12 +242,12 @@ public class ControlTitulo : MonoBehaviour {
 	}
 
 	public void salirApp(){
-		#if UNITY_IPHONE
+		/*#if UNITY_IPHONE
 		FlurryAnalytics.logEvent ("SalirTitulo", false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("SalirTitulo", false);
-		#endif
+		#endif*/
 		Application.Quit();
 	}
 	

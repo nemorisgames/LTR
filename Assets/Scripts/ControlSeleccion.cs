@@ -30,10 +30,10 @@ public class ControlSeleccion : MonoBehaviour {
         print("veces " + PlayerPrefs.GetInt("vecesSeleccion"));
         if (PlayerPrefs.GetInt("vecesSeleccion") % 4 == 0 || PlayerPrefs.GetInt("vecesSeleccion") == 2 && PlayerPrefs.GetInt("noRecordar", 0) == 0) {
 #if UNITY_ANDROID
-            if (urlAndroid != "") panelPuntuar.PlayForward();
+            //if (urlAndroid != "") panelPuntuar.PlayForward();
 #endif
 #if UNITY_IOS
-			if(urlIOS != "") panelPuntuar.PlayForward();
+			//if(urlIOS != "") panelPuntuar.PlayForward();
 #endif
         }
 #if UNITY_ANDROID
@@ -58,6 +58,8 @@ public class ControlSeleccion : MonoBehaviour {
             // if (botones[j].escena == numero)
             //{
             int miCalificacion = PlayerPrefs.GetInt("calificacionEscena" + botones[j].escena, 0);
+            miTiempo = PlayerPrefs.GetInt("escenaRecord" + escenaActual);
+            misIdolos = 
             print(miCalificacion);
             botones[j].enabled = true;
             botones[j].setInformacion(misIdolos, miTiempo, miCalificacion, 0, "Loading...", 0, "Loading...", 0, "Loading...", 0, "Loading...", 0, "Loading...", 0, "Loading...");
@@ -99,12 +101,12 @@ public class ControlSeleccion : MonoBehaviour {
             }
         }
 
-        StartCoroutine(cargarInformacionMapa());
+        //StartCoroutine(cargarInformacionMapa());
         scrollView.panel.transform.localPosition = -posProximaEscena;
         scrollView.panel.clipOffset = new Vector2(posProximaEscena.x, posProximaEscena.y);
         scrollView.RestrictWithinBounds(true);
     }
-
+    /*
 	IEnumerator cargarInformacionMapa(){
 
 		#if !UNITY_WEBPLAYER
@@ -219,14 +221,15 @@ public class ControlSeleccion : MonoBehaviour {
 
         
 	}
-
+    */
 	public void back(){
+        /*
 		#if UNITY_IPHONE
 		FlurryAnalytics.logEvent ("BotonBackSeleccion", false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("BotonBackSeleccion", false);
-		#endif
+		#endif*/
 		Application.LoadLevel ("Titulo");
 	}
 
@@ -245,12 +248,13 @@ public class ControlSeleccion : MonoBehaviour {
 		Dictionary<string,string> dict = new Dictionary<string,string>();
 		dict.Add( "activarAR", "" + 1 );
 		dict.Add( "escenaActual", "" + escenaActual );
+        /*
 		#if UNITY_IPHONE
 		FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("JugarEscena",dict, false);
-		#endif
+		#endif*/
 		#if UNITY_WEBPLAYER
 		Application.LoadLevel ("EscenaWebplayer");
 		#endif
@@ -269,12 +273,14 @@ public class ControlSeleccion : MonoBehaviour {
 		Dictionary<string,string> dict = new Dictionary<string,string>();
 		dict.Add( "activarAR", "" + 0 );
 		dict.Add( "escenaActual", "" + escenaActual );
+        /*
 		#if UNITY_IPHONE
 		FlurryAnalytics.logEventWithParameters ("JugarEscena", dict, false);
 		#endif
 		#if UNITY_ANDROID
 		FlurryAndroid.logEvent ("JugarEscena",dict, false);
 		#endif
+        */
 		#if UNITY_WEBPLAYER
 		Application.LoadLevel ("EscenaWebplayer");
 		#endif
@@ -301,7 +307,8 @@ public class ControlSeleccion : MonoBehaviour {
 	}
 
 	public void rankIt(){
-		#if UNITY_ANDROID && !UNITY_EDITOR
+		/*
+         * #if UNITY_ANDROID && !UNITY_EDITOR
 		Application.OpenURL(urlAndroid);
 		FlurryAndroid.logEvent ("RankIt", false);
 		#endif
@@ -311,6 +318,7 @@ public class ControlSeleccion : MonoBehaviour {
 		#endif
 		PlayerPrefs.SetInt ("noRecordar", 1);
 		panelPuntuar.PlayReverse ();
+        */
 	}
 
 	public void notNow(){
