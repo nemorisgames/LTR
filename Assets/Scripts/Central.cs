@@ -427,6 +427,8 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 
             PlayerPrefs.SetInt("escenaRecord" + escenaActual, (int)tiempoActual);
         }
+
+		PlayerPrefs.SetInt("escenaIdolos" + escenaActual, PlayerPrefs.GetInt("escenaIdolos" + escenaActual) + 1);
         //}
 #if !UNITY_WEBPLAYER
         //		Handheld.StopActivityIndicator();

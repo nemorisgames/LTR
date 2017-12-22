@@ -7,7 +7,7 @@ public class ControlSeleccionBoton : MonoBehaviour {
 	UISprite estrellas;
 	[HideInInspector]
 	public int misIdolos;
-	//[HideInInspector]
+	[HideInInspector]
 	public int miTiempo;
 	[HideInInspector]
 	public int miCalificacion;
