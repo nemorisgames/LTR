@@ -63,8 +63,8 @@ function Awake () {
 
 private function UpdateFunction () {
 	if(muerto){
-		transform.position += saltoMuerte * Time.deltaTime;
-		saltoMuerte -= Vector3.up * 3f * Time.deltaTime; 
+		//transform.position += saltoMuerte * Time.deltaTime;
+		//saltoMuerte -= Vector3.up * 3f * Time.deltaTime; 
 		return;
 	}
 	if(salirTemplo){
@@ -184,7 +184,7 @@ private function UpdateFunction () {
 		grounded = true;
 		jumping.jumping = false;
 		SubtractNewPlatformVelocity();
-		
+		//print("landed");
 		SendMessage("OnLand", SendMessageOptions.DontRequireReceiver);
 	}
 	
@@ -404,6 +404,7 @@ private function SubtractNewPlatformVelocity () {
 				yield 1;
 		}
 		movement.velocity -= movingPlatform.platformVelocity;
+		movement.velocity -= movement.velocity/3;
 	}
 }
 
@@ -560,9 +561,9 @@ function OnDeath(){
 	if(terminado) return;
 	GetComponent.<AudioSource>().PlayOneShot(sonidoMuerte);
 	muerto = true;
-	var g:Transform = Instantiate(sombreroPrefab, sombrero.transform.position, transform.rotation);
-	g.gameObject.GetComponent.<Rigidbody>().AddForce(Random.Range(-100f, 100f), 500f + Random.Range(-50f, 50f), Random.Range(-100f, 100f));
-	g.gameObject.GetComponent.<Rigidbody>().AddTorque(0f, Random.Range(300f, 800f), 0f);
+	//var g:Transform = Instantiate(sombreroPrefab, sombrero.transform.position, transform.rotation);
+	//g.gameObject.GetComponent.<Rigidbody>().AddForce(Random.Range(-100f, 100f), 500f + Random.Range(-50f, 50f), Random.Range(-100f, 100f));
+	//g.gameObject.GetComponent.<Rigidbody>().AddTorque(0f, Random.Range(300f, 800f), 0f);
 	sombrero.gameObject.SetActive(false);
 	//animacion.Play("Caer");
 	GameObject.Find("_central").SendMessage("perdiste");

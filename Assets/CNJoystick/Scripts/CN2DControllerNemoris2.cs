@@ -52,6 +52,7 @@ public class CN2DControllerNemoris2 : MonoBehaviour
 		if (Input.GetAxis ("Horizontal") != 0f || Input.GetAxis ("Vertical") != 0f)
 			Move (new Vector3(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), 0f));
 		utilizandose = velocidad.magnitude > 0.05f;
+        
 		//print (velocidad);
 		gameObject.SendMessage ("SetVelocity", velocidad);
 		velocidad = Vector3.Lerp (velocidad, new Vector3(0f, 0f, 0f), 30f * Time.deltaTime);
