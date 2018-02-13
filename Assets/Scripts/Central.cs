@@ -721,6 +721,9 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		characterMotor.posicionSegura = posicionInicial;
 		personaje.SendMessage ("reset");
 		personaje.position = posicionInicial;
+
+		personaje.GetComponent<CN2DControllerNemoris2>().EnableRotation(true);
+
         objetoNuevoRecord.PlayReverse();
         if (monedas == null)
 			monedas = GameObject.FindObjectsOfType<ControlMoneda> ();
@@ -729,6 +732,7 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 
 		foreach (ControlMoneda m in monedas) m.gameObject.SetActive (true);
 		bloqueFinal.gameObject.SetActive (true);
+		bloqueFinal.restart();
 		if (objetosMoviles == null || objetosMoviles.Length == 0) {
 			objetosMoviles = GameObject.FindObjectsOfType<PosicionInicial> ();
 			print ("elementos " + objetosMoviles.Length);
@@ -744,6 +748,7 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		audioPrincipal.Play();
 		personaje.SendMessage("activar", true);
         personaje.gameObject.SetActive(false);
+		Destroy(personaje.transform.Find("BloqueFinalAnim(Clone)").gameObject);
         ciclo = 0f;
 		//mensajeLoading.SetActive (false);
 		escenaCargada = true;

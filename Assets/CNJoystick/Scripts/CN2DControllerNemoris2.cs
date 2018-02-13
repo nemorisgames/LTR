@@ -14,6 +14,7 @@ public class CN2DControllerNemoris2 : MonoBehaviour
 	public bool utilizandose = false;
 
 	Transform escenaRoot;
+    bool moving = true;
 
     // Use this for initialization
     void Awake()
@@ -28,6 +29,7 @@ public class CN2DControllerNemoris2 : MonoBehaviour
         movementJoystick.JoystickMovedEvent += Move;
 
         transformCache = transform;
+
     }
 
     // You can extend this class and override any of these virtual methods
@@ -40,8 +42,11 @@ public class CN2DControllerNemoris2 : MonoBehaviour
 		//gameObject.SendMessage ("SetVelocity", velocidadMaxima * new Vector3(relativeVector.x, 0f, relativeVector.y));
 		//print(Camera.main.transform.forward + " " + relativeVector);
 		//Version 1
-		transform.LookAt (transform.position + new Vector3(Camera.main.transform.right.x, 0f, Camera.main.transform.right.z) * relativeVector.x + new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z) * relativeVector.y);
-		velocidad = velocidadMaxima * (new Vector3 (Camera.main.transform.right.x, 0f, Camera.main.transform.right.z) * relativeVector.x + new Vector3 (Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z) * relativeVector.y);
+        if(moving){
+            transform.LookAt (transform.position + new Vector3(Camera.main.transform.right.x, 0f, Camera.main.transform.right.z) * relativeVector.x + new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z) * relativeVector.y);
+		    velocidad = velocidadMaxima * (new Vector3 (Camera.main.transform.right.x, 0f, Camera.main.transform.right.z) * relativeVector.x + new Vector3 (Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z) * relativeVector.y);
+        }
+		
 		//Version 2
 		//transform.LookAt (transform.position + new Vector3(relativeVector.x, 0f, relativeVector.y));
 		//transform.LookAt (transform.position + new Vector3(escenaRoot.right.x, 0f, escenaRoot.right.z) * relativeVector.x + new Vector3(escenaRoot.forward.x, 0f, escenaRoot.forward.z) * relativeVector.y);
@@ -74,6 +79,10 @@ public class CN2DControllerNemoris2 : MonoBehaviour
 
     protected virtual void StartMoving()
     {
+    }
+
+    public void EnableRotation(bool b){
+        moving = b;
     }
 
 }

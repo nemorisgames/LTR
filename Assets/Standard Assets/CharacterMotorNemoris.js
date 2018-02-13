@@ -515,7 +515,7 @@ function reset(){
 	salirTemplo = false;
 	animacion.SetTrigger("reset");
 	transform.rotation = Quaternion.identity;
-	sombrero.gameObject.SetActive(true);
+	//sombrero.gameObject.SetActive(true);
 	saltoMuerte = new Vector3(0f, 5f, 0f);
 	movement.velocity = Vector3.zero;
 	inputMoveDirection = Vector3.zero;
@@ -550,7 +550,7 @@ function OnRobar(){
 	inputMoveDirection = Vector3.zero;
 	movement.frameVelocity = Vector3.zero;
 	yield WaitForSeconds(1.1);
-	Instantiate(disparo, transform.position + Vector3.up * 0.8 + transform.right * 0.25 + transform.forward * 0.1, disparo.rotation);
+	//Instantiate(disparo, transform.position + Vector3.up * 0.8 + transform.right * 0.25 + transform.forward * 0.1, disparo.rotation);
 	yield WaitForSeconds(0.7);
 	GetComponent.<Collider>().enabled = false;
 	salirTemplo = true;
@@ -564,7 +564,7 @@ function OnDeath(){
 	//var g:Transform = Instantiate(sombreroPrefab, sombrero.transform.position, transform.rotation);
 	//g.gameObject.GetComponent.<Rigidbody>().AddForce(Random.Range(-100f, 100f), 500f + Random.Range(-50f, 50f), Random.Range(-100f, 100f));
 	//g.gameObject.GetComponent.<Rigidbody>().AddTorque(0f, Random.Range(300f, 800f), 0f);
-	sombrero.gameObject.SetActive(false);
+	//sombrero.gameObject.SetActive(false);
 	//animacion.Play("Caer");
 	GameObject.Find("_central").SendMessage("perdiste");
 	//animacion.SetBool("lose", true);
