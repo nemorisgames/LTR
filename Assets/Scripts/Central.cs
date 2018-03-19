@@ -330,8 +330,8 @@ personaje.position = new Vector3(int.Parse (resp[1]), int.Parse(resp[2]) + 1f, i
 
 		for (int i = 0; i<nbloques; i++) {
 			int indiceBloque = int.Parse(resp[i * 4 + 4]) >= bloquesPrefab.Length ? 0 : int.Parse(resp[i * 4 + 4]);
-Transform t = (Transform)Instantiate(bloquesPrefab[indiceBloque], new Vector3(int.Parse(resp[i * 4 + 5]), int.Parse(resp[i * 4 + 6]) / 2f + 1f, int.Parse(resp[i * 4 + 7])), Quaternion.identity);
-bloques[i] = t.gameObject.GetComponent<Bloque>();
+			Transform t = (Transform)Instantiate(bloquesPrefab[indiceBloque], new Vector3(int.Parse(resp[i * 4 + 5]), int.Parse(resp[i * 4 + 6]) / 2f + 1f, int.Parse(resp[i * 4 + 7])), Quaternion.identity);
+			bloques[i] = t.gameObject.GetComponent<Bloque>();
 			bloques[i].aplicarRotacion();
 			if(activarAR){ 
 
@@ -347,16 +347,16 @@ bloques[i] = t.gameObject.GetComponent<Bloque>();
 			else
 				t.parent = escenaRoot;
 		}
-		bloquesRoot.gameObject.SendMessage("calcular");
-		MeshFilter[] combinados = bloquesRoot.gameObject.GetComponentsInChildren<MeshFilter>();
-		for (int i = 0; i<combinados.Length; i++) {
+		//bloquesRoot.gameObject.SendMessage("calcular");
+		//MeshFilter[] combinados = bloquesRoot.gameObject.GetComponentsInChildren<MeshFilter>();
+		//for (int i = 0; i<combinados.Length; i++) {
 			//combinados[i].gameObject.AddComponent<MeshCollider>();
-		}
+		//}
 		for (int i = 0; i<nbloques; i++) {
 			int indiceBloque = int.Parse(resp[i * 4 + 4]) >= bloquesPrefab.Length ? 0 : int.Parse(resp[i * 4 + 4]);
 			//if(activarAR){ 
 			if(indiceBloque == 0 || indiceBloque == 2 || indiceBloque == 3 || indiceBloque == 32 || (indiceBloque >= 34 && indiceBloque <= 41))
-                Destroy(bloques[i].transform.Find("cubo_001_arreglado").gameObject); //Destroy(bloques[i].gameObject); //
+                //Destroy(bloques[i].transform.Find("cubo_001_arreglado").gameObject); //Destroy(bloques[i].gameObject); //
 			//}
 			//hace que los switch carguen info
 			if(indiceBloque == 6 || indiceBloque == 9 || indiceBloque == 10){
@@ -368,7 +368,7 @@ bloques[i] = t.gameObject.GetComponent<Bloque>();
 		#endif
 		if (escenaActual == 1) {
 			GameObject g = GameObject.Find("BloqueFinal(Clone)");
-g.transform.Find("idolo").gameObject.SetActive(true);
+			g.transform.Find("idolo").gameObject.SetActive(true);
 			g.transform.Find("13").gameObject.SetActive(false);
 		}
 		posicionInicial = personaje.position;

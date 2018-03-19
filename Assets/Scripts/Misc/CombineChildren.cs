@@ -16,7 +16,7 @@ public class CombineChildren : MonoBehaviour {
 	public bool generateTriangleStrips = true;
 
 	void Start () {
-		calcular ();
+		//calcular ();
 	}
 
 	/// This option has a far longer preprocessing time at startup but leads to better runtime performance.
