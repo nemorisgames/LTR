@@ -343,7 +343,7 @@ personaje.position = new Vector3(int.Parse (resp[1]), int.Parse(resp[2]) + 1f, i
 				personaje.GetComponent<Collider>().enabled = true;
 			}
 			if(indiceBloque == 0 || indiceBloque == 2 || indiceBloque == 3 || indiceBloque == 32 || (indiceBloque >= 34 && indiceBloque <= 41))
-				t.parent = bloquesRoot;
+				t.parent = escenaRoot;
 			else
 				t.parent = escenaRoot;
 		}
@@ -721,6 +721,7 @@ personaje.position = new Vector3(int.Parse (resp[1]), int.Parse(resp[2]) + 1f, i
 		characterMotor.posicionSegura = posicionInicial;
 		personaje.SendMessage ("reset");
 		personaje.position = posicionInicial;
+		ResetBlocks();
 
 		personaje.GetComponent<CN2DControllerNemoris2>().EnableRotation(true);
 
@@ -748,7 +749,8 @@ personaje.position = new Vector3(int.Parse (resp[1]), int.Parse(resp[2]) + 1f, i
 		audioPrincipal.Play();
 		personaje.SendMessage("activar", true);
         personaje.gameObject.SetActive(false);
-		Destroy(personaje.transform.Find("BloqueFinalAnim(Clone)").gameObject);
+		if(personaje.transform.Find("BloqueFinalAnim(Clone)") != null)
+			Destroy(personaje.transform.Find("BloqueFinalAnim(Clone)").gameObject);
         ciclo = 0f;
 		//mensajeLoading.SetActive (false);
 		escenaCargada = true;
@@ -804,6 +806,10 @@ personaje.position = new Vector3(int.Parse (resp[1]), int.Parse(resp[2]) + 1f, i
             tiempoInicial = Time.timeSinceLevelLoad;
         }
     }
+
+	void ResetBlocks(){
+		foreach(Bloque b in bloques) b.ResetBlock();
+	}
 
     public void showAd()
     {

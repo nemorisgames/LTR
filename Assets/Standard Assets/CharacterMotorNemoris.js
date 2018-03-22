@@ -551,7 +551,7 @@ function OnRobar(){
 	movement.frameVelocity = Vector3.zero;
 	yield WaitForSeconds(1.1);
 	//Instantiate(disparo, transform.position + Vector3.up * 0.8 + transform.right * 0.25 + transform.forward * 0.1, disparo.rotation);
-	yield WaitForSeconds(0.7);
+	//yield WaitForSeconds(0.7);
 	GetComponent.<Collider>().enabled = false;
 	salirTemplo = true;
 }
