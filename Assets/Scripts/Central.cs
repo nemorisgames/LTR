@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 //using UnityEngine.Advertisements;
-using Prime31;
+//using Prime31;
 
 public class Central : MonoBehaviour {
 	public Transform[] bloquesPrefab;

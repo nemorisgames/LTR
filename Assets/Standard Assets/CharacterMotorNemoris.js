@@ -52,11 +52,11 @@ var posicionSegura : Vector3;
 private var controller : CharacterController;
 var sonidoSalto:AudioClip;
 var sonidoMuerte:AudioClip;
-var proteccionEscudo:GameObject;
+var proteccionEscudo:MeshRenderer;
 
 function Awake () {
-	proteccionEscudo = transform.Find("proteccion").gameObject;
-	proteccionEscudo.SetActive(false);
+	//proteccionEscudo = transform.Find("proteccion").gameObject;
+	//sproteccionEscudo.SetActive(false);
 	controller = GetComponent (CharacterController);
 	tr = transform;
 }
@@ -231,14 +231,16 @@ var saltoMuerte:Vector3 = new Vector3(0f, 5f, 0f);
 function Update () {
 	if(protegido){
 		if(tiempoProteccion <= Time.timeSinceLevelLoad){ 
-			proteccionEscudo.SetActive(false);
 		 	protegido = false;
 		}
+		//print("proteccion " + (((tiempoProteccion - Time.timeSinceLevelLoad) / 3.0) * 0.5f));
+		proteccionEscudo.material.color = new Color(116f / 255f, 215f / 255f, 1f, ((tiempoProteccion - Time.timeSinceLevelLoad) / 3.0) * 0.5f);
 	}
 	if (!useFixedUpdate)
 		UpdateFunction();
 	if(!muerto && transform.position.y <= 0f){ 
-		proteccionEscudo.SetActive(false);
+		//print("no proteccion muerte");
+		proteccionEscudo.material.color = new Color(116f / 255f, 215f / 255f, 1f, 0f);
 		protegido = false;
 		OnDeath();
 	}
@@ -503,7 +505,8 @@ var tiempoProteccion:float = 0f;
 function proteccion(){
 	tiempoProteccion = Time.timeSinceLevelLoad + 3.0;
 	protegido = true;
-	proteccionEscudo.SetActive(true);
+	print("proteccion inicio");
+	proteccionEscudo.material.color = new Color(116f / 255f, 215f / 255f, 1f, 0.5f);
 }
 
 function reset(){
