@@ -257,11 +257,7 @@ public class ControlSeleccion : MonoBehaviour {
 		#endif*/
 		#if UNITY_WEBPLAYER
 		Application.LoadLevel ("EscenaWebplayer");
-		#endif
-		#if UNITY_IPHONE
-		Application.LoadLevel ("Escena");
-		#endif
-		#if UNITY_ANDROID
+		#else
 		Application.LoadLevel ("Escena");
 		#endif
 	}

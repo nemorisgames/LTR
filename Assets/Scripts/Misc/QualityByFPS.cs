@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class QualityByFPS : MonoBehaviour {
-	float timeA;
+	/*float timeA;
 	public int fps;
 	public int lastFPS;
 	public GUIStyle textStyle;
@@ -14,7 +14,6 @@ public class QualityByFPS : MonoBehaviour {
             QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("quality", QualitySettings.GetQualityLevel()));
         
         timeA = Time.timeSinceLevelLoad;
-		//DontDestroyOnLoad (this);
 	}
 	
 	// Update is called once per frame
@@ -68,5 +67,5 @@ public class QualityByFPS : MonoBehaviour {
 	void OnGUI()
 	{
 		//GUI.Label(new Rect( Screen.width / 2 - 50 ,5 , 100, 30), Application.loadedLevelName+" "+lastFPS, textStyle);
-	}
+	}*/
 }
