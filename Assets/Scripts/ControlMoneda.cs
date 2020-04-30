@@ -10,7 +10,7 @@ public class ControlMoneda : MonoBehaviour {
 
 	void OnTriggerEnter(Collider c){
 		if (c.CompareTag ("Player")) {
-			GameObject.Find("_central").SendMessage("tomarOro");
+			Central.Instance.tomarOro();
 			//Destroy (gameObject);
 			gameObject.SetActive(false);
 			if(transform.parent.gameObject.tag != "Bloque") 

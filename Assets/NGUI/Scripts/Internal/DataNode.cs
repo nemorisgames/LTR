@@ -394,7 +394,7 @@ public class DataNode
 
 			if (parts.Length == 4)
 			{
-				Color32 v;
+				Color32 v = Color.white;
 				if (byte.TryParse(parts[0], out v.r) &&
 					byte.TryParse(parts[1], out v.g) &&
 					byte.TryParse(parts[2], out v.b) &&

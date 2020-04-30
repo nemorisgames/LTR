@@ -70,7 +70,7 @@ public class ControlSeleccionBoton : MonoBehaviour {
 	}
 
 	public void seleccionada(){
-		transform.root.gameObject.SendMessage ("escenaSeleccionada", this);
+		ControlSeleccion.Instance.escenaSeleccionada(this);
 	}
 
 	public void destacar(){

@@ -14,7 +14,7 @@ public class ControlSeleccionDetalles : MonoBehaviour {
 
 	}
 
-	void setInformacion(ControlSeleccionBoton c){
+	public void setInformacion(ControlSeleccionBoton c){
 		recordTiempo [0].text = setTiempo(c.tiempoPrimero);
 		recordTiempoNombre [0].text = c.tiempoPrimeroNombre==""?"-":c.tiempoPrimeroNombre;
 		recordTiempo [1].text = setTiempo(c.tiempoSegundo);

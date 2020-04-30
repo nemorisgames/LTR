@@ -228,12 +228,12 @@ public class AntiPiracy : MonoBehaviour
 			Debug.Log(String.Format("The absolute URL of the application is {0}", Application.absoluteURL));
 		}
 		
-		if (Application.platform != RuntimePlatform.WindowsWebPlayer &&
+		/*if (Application.platform != RuntimePlatform.WindowsWebPlayer &&
 		    Application.platform != RuntimePlatform.OSXWebPlayer)
 		{
 			Debug.Log("Testing for piracy but not in web browser, so not worrying about it.");
 			return;
-		}
+		}*/
 		
 		// if it's not a valid remote host, bounce the user to the proper URL
 		if (IsValidHost() == false)

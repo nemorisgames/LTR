@@ -4,6 +4,7 @@ using System.Collections.Generic;
 //using Prime31;
 
 public class ControlSeleccion : MonoBehaviour {
+    public static ControlSeleccion Instance;
 	public ControlSeleccionBoton[] botones; 
 	public ControlSeleccionBloqueo[] bloqueos;
 	public int[] estrellasBloqueo;
@@ -22,9 +23,17 @@ public class ControlSeleccion : MonoBehaviour {
 	public string urlIOS;
 
 	public GameObject botonHistoriaFinal1;
+    private ControlSeleccionDetalles controlDetalles;
 
     // Use this for initialization
+    void Awake(){
+        if(Instance != null)
+            Destroy(Instance);
+        Instance = this;
+    }
+
     void Start() {
+        controlDetalles = panelDetalles.GetComponent<ControlSeleccionDetalles>();
         botonHistoriaFinal1.SetActive(PlayerPrefs.GetInt("HistoriaFinal1", 0) == 1);
         PlayerPrefs.SetInt("vecesSeleccion", PlayerPrefs.GetInt("vecesSeleccion", 0) + 1);
         print("veces " + PlayerPrefs.GetInt("vecesSeleccion"));
@@ -326,11 +335,11 @@ public class ControlSeleccion : MonoBehaviour {
 		panelPuntuar.PlayReverse ();
 	}
 
-	void escenaSeleccionada(ControlSeleccionBoton boton){
+	public void escenaSeleccionada(ControlSeleccionBoton boton){
 		print ("escena sel " + boton.escena);
 		escenaActual = boton.escena;
 		panelDetalles.PlayForward ();
-		panelDetalles.gameObject.SendMessage("setInformacion", boton);
+        controlDetalles.setInformacion(boton);
 	}
 	
 	// Update is called once per frame

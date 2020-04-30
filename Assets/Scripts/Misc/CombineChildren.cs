@@ -20,7 +20,7 @@ public class CombineChildren : MonoBehaviour {
 	}
 
 	/// This option has a far longer preprocessing time at startup but leads to better runtime performance.
-	void calcular () {
+	public void calcular () {
 		Component[] filters  = GetComponentsInChildren(typeof(MeshFilter));
 		Matrix4x4 myTransform = transform.worldToLocalMatrix;
 		Hashtable materialToMesh= new Hashtable();

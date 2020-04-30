@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 //using UnityEngine.Advertisements;
 //using Prime31;
 
 public class Central : MonoBehaviour {
+	public static Central Instance;
 	public Transform[] bloquesPrefab;
 	public Bloque[] bloques;
 
 	public Transform personaje;
 	//public Transform imagen;
-
 	public bool traerBD = true;
 	[HideInInspector]
 	public bool activarAR = true;
@@ -58,8 +59,8 @@ public class Central : MonoBehaviour {
 	public TweenPosition objetoNuevoRecord;
 
 	float ciclo = 0f;
-	Transform escenaRoot;
-	Transform bloquesRoot;
+	public Transform escenaRoot;
+	public Transform bloquesRoot;
 
 	public GameObject[] objetosAndroid;
 	public GameObject[] objetosWebplayer;
@@ -75,8 +76,8 @@ public class Central : MonoBehaviour {
 	public UILabel tiempoEstrella3;
 
 	public UILabel temploIndicador;
-
-	private CharacterMotorNemoris characterMotor; 
+	[HideInInspector]
+	public CharController characterMotor; 
 
 	public GameObject publicarFacebook;
 
@@ -90,6 +91,7 @@ public class Central : MonoBehaviour {
 
     public TweenPosition cinematica;
     public TweenAlpha[] cinematicaBordes;
+	private CombineChildren combineChildren;
     /*
     #if UNITY_IPHONE
         private TrackableBehaviour mTrackableBehaviour;
@@ -113,7 +115,12 @@ public class Central : MonoBehaviour {
         }
     #endif
     */
-    // Use this for initialization
+    void Awake(){
+		if(Instance != null)
+			Destroy(Instance);
+		Instance = this;
+	}
+
     void Start () {
 		/*
 		 * #if UNITY_IPHONE
@@ -124,13 +131,14 @@ public class Central : MonoBehaviour {
 		}
 		#endif	
 		*/
+		combineChildren = bloquesRoot.GetComponent<CombineChildren>();
 		oroLabel.text = "" + PlayerPrefs.GetInt ("oro", 0);
-		characterMotor = personaje.GetComponent<CharacterMotorNemoris> ();
+		characterMotor = personaje.GetComponent<CharController> ();
 		#if (!UNITY_ANDROID && !UNITY_WEBPLAYER) || UNITY_EDITOR 
 		if(objetosAndroid != null && objetosAndroid.Length > 0) for(int i = 0; i < objetosAndroid.Length; i++) objetosAndroid[i].SetActive(false);
 #endif
 		//escenaRoot = imagen.FindChild ("escenaRoot");
-		print (escenaActual + "=" + PlayerPrefs.GetInt ("escenaActual", 1));
+		//print (escenaActual + "=" + PlayerPrefs.GetInt ("escenaActual", 1));
 		activarAR = PlayerPrefs.GetInt ("activarAR", 1)==1?true:false;
 		escenaActual = PlayerPrefs.GetInt ("escenaActual", 1);
 		if (escenaActual == 1 && temploIndicador != null) 
@@ -306,7 +314,7 @@ public class Central : MonoBehaviour {
             case 21: retorno = VariablesGlobales.escena21; break;
         }
         string[] ret = retorno.Split(new char[] { '$' });
-        print("id: " + ret[0]);
+        //print("id: " + ret[0]);
         pk_escena = int.Parse(ret[0]);
         PlayerPrefs.SetString("escenaActualizada" + escenaActual, ret[1]);
         tiempoMinimo = int.Parse(ret[2]);
@@ -318,7 +326,7 @@ public class Central : MonoBehaviour {
 
         if (ret.Length > 4 && ret[4] != "")
         {
-            print("nueva escena recibida");
+            //print("nueva escena recibida");
             PlayerPrefs.SetString("escena" + escenaActual, ret[4]);
         }
         testEscena = PlayerPrefs.GetString("escena" + escenaActual);
@@ -347,7 +355,7 @@ bloques[i] = t.gameObject.GetComponent<Bloque>();
 			else
 				t.parent = escenaRoot;
 		}
-		bloquesRoot.gameObject.SendMessage("calcular");
+		combineChildren.calcular();
 		MeshFilter[] combinados = bloquesRoot.gameObject.GetComponentsInChildren<MeshFilter>();
 		for (int i = 0; i<combinados.Length; i++) {
 			//combinados[i].gameObject.AddComponent<MeshCollider>();
@@ -552,16 +560,16 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		//FlurryAndroid.logEvent ("BotonContinuar", dict, false);
 		#endif
 		#if UNITY_WEBPLAYER && !UNITY_EDITOR
-		GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("Boton", "Continuar", "Escena"+escenaActual);
+		//GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("Boton", "Continuar", "Escena"+escenaActual);
 		#endif
 		if (escenaActual == 1 && PlayerPrefs.GetInt ("Historia2", 0) == 0)
-				Application.LoadLevel ("Historia21");
+				SceneManager.LoadScene ("Historia21");
 		else {
 			if(escenaActual == 21){
 				if(PlayerPrefs.GetInt("HistoriaFinal1", 0) == 0)
-					Application.LoadLevel ("HistoriaFinal1");
+					SceneManager.LoadScene ("HistoriaFinal1");
 				else 
-					Application.LoadLevel("SeleccionEscena");
+					SceneManager.LoadScene("SeleccionEscena");
 			}
 			else{
 				if(activarAR) play ();
@@ -591,9 +599,9 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		//FlurryAndroid.logEvent ("JugarEscena",dict, false);
 		#endif
 		#if UNITY_WEBPLAYER
-		Application.LoadLevel ("EscenaWebplayer");
+		SceneManager.LoadScene("EscenaWebplayer");
 		#else
-		Application.LoadLevel ("Escena");
+		SceneManager.LoadScene("Escena");
 		#endif
 	}
 	
@@ -663,7 +671,7 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		#if UNITY_WEBPLAYER && !UNITY_EDITOR
 		GameObject.Find("TrackingWebplayer").GetComponent<TrackingNemoris>().enviarLog("Boton", "Exit", "Escena"+escenaActual);
 		#endif
-		Application.LoadLevel ("SeleccionEscena");
+		SceneManager.LoadScene("SeleccionEscena");
 	}
 
 	public void again(){
@@ -715,7 +723,7 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		escenaRoot.rotation = Quaternion.identity;
 		escenaRoot.position = Vector3.zero;
 		characterMotor.posicionSegura = posicionInicial;
-		personaje.SendMessage ("reset");
+		characterMotor.reset();
 		personaje.position = posicionInicial;
         objetoNuevoRecord.PlayReverse();
         if (monedas == null)
@@ -738,14 +746,14 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		if(Camera.main.gameObject.GetComponent<CNCameraFollow>() != null && !Camera.main.gameObject.GetComponent<CNCameraFollow>().enabled) 
 			Camera.main.gameObject.GetComponent<CNCameraFollow>().enabled = true;
 		audioPrincipal.Play();
-		personaje.SendMessage("activar", true);
+		characterMotor.activar(true);
         personaje.gameObject.SetActive(false);
         ciclo = 0f;
 		//mensajeLoading.SetActive (false);
 		escenaCargada = true;
 	}
 
-	void perdiste(){
+	public void perdiste(){
 		if (PlayerPrefs.GetInt ("oro", 0) <= 0)
 			estado = 4;
 		else {
@@ -761,11 +769,11 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 		PlayerPrefs.SetInt ("oro", 0);
 		oroLabel.text = "" + 0;
 		yield return new WaitForSeconds (1f);
-		personaje.SendMessage ("proteccion");
-		personaje.SendMessage ("reset");
+		characterMotor.proteccion();
+		characterMotor.reset();
 	}
 
-	void tomarOro(){
+	public void tomarOro(){
 		PlayerPrefs.SetInt ("oro", PlayerPrefs.GetInt ("oro", 0) + 1);
 		oroLabel.text = "" + PlayerPrefs.GetInt ("oro", 0);
 		audioPrincipal.PlayOneShot (monedaTomada);
@@ -791,7 +799,7 @@ g.transform.Find("idolo").gameObject.SetActive(true);
             //panelPausa.PlayReverse();
             Time.timeScale = 1f;
             estado = 1;
-            personaje.SendMessage("activar", true);
+            characterMotor.activar(true);
             tiempoInicial = Time.timeSinceLevelLoad;
         }
     }
@@ -836,13 +844,13 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 			if (Input.GetKeyUp(KeyCode.Escape)) pausar();
 			break;
 		case 3:
-			if(!panelPasado.enabled && Vector3.Distance(panelPasado.from, panelPasado.position) < 10f){
+			if(!panelPasado.enabled && Vector3.Distance(panelPasado.from, panelPasado.value) < 10f){
                 if (mensajeSlide.activeSelf) mensajeSlide.SetActive (false);
 				if (mensajeZoom.activeSelf) mensajeZoom.SetActive (false);
 				if(Camera.main.gameObject.GetComponent<CNCameraFollow>() != null && Camera.main.gameObject.GetComponent<CNCameraFollow>().enabled) 
 					Camera.main.gameObject.GetComponent<CNCameraFollow>().enabled = false;
 				GameObject publicidad = GameObject.Find("leadboltPublicidad");
-				if(publicidad != null) publicidad.SendMessage("verAd");
+				//if(publicidad != null) publicidad.SendMessage("verAd");
 				audioPrincipal.Stop();
 				audioPrincipal.PlayOneShot(fanfarria);
 				activarElementosGUI (false);
@@ -861,7 +869,7 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 					}
 				}
 				estrella.width = 112 * calificacion;
-				personaje.SendMessage("activar", false);
+				characterMotor.activar(false);
 				Dictionary<string,string> dict = new Dictionary<string,string>();
 				dict.Add( "calificacion", "" + calificacion );
 				dict.Add( "tiempo", "" + tiempoActual );
@@ -885,18 +893,18 @@ g.transform.Find("idolo").gameObject.SetActive(true);
 			//print ("terminado");
 			break;
 		case 4:
-			if(!panelPerdiste.enabled && Vector3.Distance(panelPerdiste.from, panelPerdiste.position) < 10f){
+			if(!panelPerdiste.enabled && Vector3.Distance(panelPerdiste.from, panelPerdiste.value) < 10f){
 
                 if (mensajeSlide.activeSelf) mensajeSlide.SetActive (false);
 				if (mensajeZoom.activeSelf) mensajeZoom.SetActive (false);
 				if(Camera.main.gameObject.GetComponent<CNCameraFollow>() != null && Camera.main.gameObject.GetComponent<CNCameraFollow>().enabled) 
 					Camera.main.gameObject.GetComponent<CNCameraFollow>().enabled = false;
 				GameObject publicidad = GameObject.Find("leadboltPublicidad");
-				if(publicidad != null) publicidad.SendMessage("verAd");
+				//if(publicidad != null) publicidad.SendMessage("verAd");
 				audioPrincipal.Stop();
 				audioPrincipal.PlayOneShot(perdisteMusica);
 				activarElementosGUI (false);
-				personaje.SendMessage("activar", false);
+				characterMotor.activar(false);
 				Dictionary<string,string> dict = new Dictionary<string,string>();
 				dict.Add( "tiempo", "" + tiempoActual );
 				dict.Add( "escenaActual", "" + escenaActual );

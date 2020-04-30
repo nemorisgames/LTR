@@ -21,7 +21,7 @@ public class comportamientoEspinas : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.CompareTag ("Player")) {
-			other.SendMessage("OnDeath");
+			other.GetComponent<CharController>().OnDeath();
 			//collider.enabled = false;
 		}
 	}

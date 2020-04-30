@@ -12,7 +12,7 @@ public class ComportamientoIdolo : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.CompareTag ("Player")) {
 			c.estado = 3;
-			other.SendMessage("OnRobar");
+			other.GetComponent<CharController>().OnRobar();
 			print ("terminado");
 			//Destroy(gameObject);
 			gameObject.SetActive(false);
